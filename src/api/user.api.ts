@@ -1,5 +1,5 @@
-import { http as Api } from "mobile-app-test";
-import type { Response } from "mobile-app-test";
+import { http as Api } from "../control/http"
+import type { Response } from "../control/http";
 
 /** 登录参数 */
 interface LoginParams {

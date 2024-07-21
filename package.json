@@ -5,6 +5,7 @@
   "typings": "dist/index.d.ts",
   "description": "mobile-app",
   "style": "dist/style.css",
+  "type":"module",
   "files": [
     "dist",
     "src",
@@ -57,7 +58,8 @@
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
     "type-check": "vue-tsc --noEmit",
-    "lib": "vite build --config ./build/lib.config.ts"
+    "lib": "vite build --config ./build/lib.config.ts",
+    "build": "node ./build/install.js"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-4000720240327002",
@@ -74,7 +76,9 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-4000720240327002",
     "@dcloudio/uni-mp-xhs": "3.0.0-4000720240327002",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4000720240327002",
+    "@types/node": "^20.14.11",
     "js-md5": "^0.8.3",
+    "ts-node": "^10.9.2",
     "uni-mini-router": "^0.1.6",
     "vue": "^3.3.11",
     "vue-i18n": "^9.1.9",
