@@ -1,69 +1,25 @@
-// import type { Component } from "vue";
-// import { createSSRApp } from "vue";
-// import wx from "weixin-js-sdk";
 import { createRouter, type Router } from "uni-mini-router";
+import type { IMobileAppHooks, IMobileAppOption, TApp } from "./type";
+import { createSSRApp } from "vue";
 
-/**钩子函数，可以定义生命周期 */
-interface MobileAppHooks {
-  /**创建app前 */
-  onBeforeCreate(): void;
-  /**创建app后 */
-  onCreated(app: App): void;
-  //其他的按需添加
-}
-
-/**app配置项 */
-export interface MobileAppOption {
-  /**环境变量 */
-  env: {
-    /**接口请求地址 */
-    httpBaseUrl: string;
-    /**文件基础地址 */
-    fileBaseUrl: string;
-    /**文件上传路径 */
-    fileUploadUri: string;
-    /**其他的环境变量 */
-    [x: string]: string;
-  };
-  /**需要加载的插件 */
-  plugins?: AppPlugin[];
-  /**路由列表（uni-mini-router的路由） */
-  routes?: Record<string, any>[];
-
-  hooks?: Partial<MobileAppHooks>;
-  /**app组件 */
-  app: any;
-}
-
-// type App = ReturnType<typeof createSSRApp>;
-type App = any;
-
-/**插件对象 */
-export interface AppPlugin {
-  (): {
-    /**路由列表（uni-mini-router的路由） */
-    routes: Record<string, any>[];
-  };
-}
 
 export class MobileApp {
-  // private _app: App;
-  private _option: MobileAppOption;
+  private _app: TApp;
+  private _option: IMobileAppOption;
   private _router: Router;
 
-  constructor(option: MobileAppOption) {
+  constructor(option: IMobileAppOption) {
     this._option = option;
     this.emitHooks("onBeforeCreate");
-    // this._app = this.createApp();
+    this._app = this.createApp();
     this.emitHooks("onCreated", this.app);
-    this.initallPlugin();
     this._router = this.createRouter();
   }
 
   /**调用钩子 */
   private async emitHooks<
-    T extends keyof MobileAppHooks = keyof MobileAppHooks
-  >(key: T, ...args: Parameters<MobileAppHooks[T]>) {
+    T extends keyof IMobileAppHooks = keyof IMobileAppHooks
+  >(key: T, ...args: Parameters<IMobileAppHooks[T]>) {
     if (!this.hooks) return;
     const fun = this.hooks[key];
     if (!fun) return;
@@ -79,21 +35,11 @@ export class MobileApp {
   }
 
   /**初始化全局实例 */
-  static initInstance(option: MobileAppOption) {
+  static initInstance(option: IMobileAppOption) {
     MobileApp._context = new MobileApp(option);
     return {
       app: MobileApp.context.app,
     };
-  }
-
-  /**加载插件 */
-  private initallPlugin() {
-    if (!this.option.plugins?.length) return;
-    this._option.routes = this._option.routes || [];
-    this.option.plugins.forEach((plugin) => {
-      const res = plugin();
-      this._option.routes!.push(...res.routes);
-    });
   }
 
   /**创建路由 */
@@ -106,18 +52,17 @@ export class MobileApp {
   }
 
   /**创建app */
-  // private createApp() {
-  //   const app = createSSRApp(this._option.appCom);
-  //   app.config.globalProperties.$wx = wx;
-  //   return app;
-  // }
+  private createApp() {
+    const app = createSSRApp(this._option.appCom);
+    return app;
+  }
 
   public get option() {
     return this._option;
   }
 
   public get app() {
-    return this.option.app;
+    return this._app;
   }
 
   public get router() {

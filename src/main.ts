@@ -1,8 +1,10 @@
 import App from "./App.vue";
 import { routes } from "./router";
 import { createMobileApp } from "./control";
+import uviewPlus from "uview-plus";
+// import { createSSRApp } from "vue";
 export function createApp() {
-  return createMobileApp({
+  const { app } = createMobileApp({
     appCom: App,
     routes: routes,
     env: {
@@ -12,7 +14,12 @@ export function createApp() {
     },
     hooks: {
       onBeforeCreate() {},
-      onCreated(app) {},
+      onCreated(app) {
+        app.use(uviewPlus);
+      },
     },
   });
+  return {
+    app,
+  };
 }

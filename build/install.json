@@ -1,0 +1,4 @@
+{
+  "pages": ["pages/login/login"],
+  "files": ["api", "stores"]
+}
