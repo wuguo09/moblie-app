@@ -5,7 +5,7 @@
   "typings": "dist/index.d.ts",
   "description": "mobile-app",
   "style": "dist/style.css",
-  "type":"module",
+  "type": "module",
   "files": [
     "dist",
     "src",
@@ -77,6 +77,8 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4000720240327002",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4000720240327002",
     "@types/node": "^20.14.11",
+    "gulp": "^5.0.0",
+    "gulp-replace": "^1.1.4",
     "js-md5": "^0.8.3",
     "ts-node": "^10.9.2",
     "uni-mini-router": "^0.1.6",
