@@ -5,6 +5,6 @@ import { fileURLToPath } from "url"
 export default () => {
     return defineConfig({
         plugins:[basePlugin()],
-        srcPath: fileURLToPath(new URL('./src-test', import.meta.url).href)
+        srcPath: fileURLToPath(new URL('./src', import.meta.url).href)
     })
 }

@@ -59,7 +59,7 @@
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
     "type-check": "vue-tsc --noEmit",
     "lib": "vite build --config ./build/lib.config.ts",
-    "build": "node ./build/install.js"
+    "install-plugin": "node ./build/install.js"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-4000720240327002",
