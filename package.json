@@ -1,6 +1,6 @@
 {
   "name": "mobile-app-test",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "module": "dist/mobile-app.es.js",
   "typings": "dist/index.d.ts",
   "description": "mobile-app",
@@ -11,6 +11,9 @@
     "src",
     "build"
   ],
+  "bin": {
+    "install-plugin": "./build/install.js"
+  },
   "exports": {
     ".": {
       "import": "./dist/mobile-app.es.js"
