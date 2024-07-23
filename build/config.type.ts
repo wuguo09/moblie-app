@@ -4,7 +4,10 @@ interface IPlugin {
   name: string;
   /**插件资源基础路径 */
   srcPath: string;
-  /**需要的页面（pages.json里的配置） */
+  /**
+   * 需要的页面（pages.json里的配置）
+   * todo 需要支持分包里的页面
+   */
   pages: [];
   /**
    * 需要的文件
@@ -20,12 +23,12 @@ interface IPlugin {
   /**
    * 分包名称
    * 若有，会把这些页面单独分宝
-   * 推荐，可以减少主包提体积
+   * !推荐分包，可以减少主包提体积，且对含有插件的项目再发布插件也更友好
    *  */
   subpackName?: string;
   /**
-   * todo 需要替换的路径别名(resolve.alias)，分包时有效，用于处理依赖的路径变更
-   * 所有路径别名
+   * 需要替换的路径别名(resolve.alias)，分包时有效，用于处理依赖的路径变更
+   * 所有路径别名都要以"@"标识符开头，换而言之，只能定义一个‘@’路径别名
    */
   aliasReplace?:string[]
 }

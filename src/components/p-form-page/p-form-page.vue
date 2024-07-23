@@ -147,7 +147,7 @@
 <script lang="ts" setup>
 import { provide, ref, toRaw, unref, watch, onMounted } from "vue";
 import { formPageProps } from "./interface";
-import MyUpload from "../my-upload/my-upload.vue";
+import MyUpload from "../p-my-upload/p-my-upload.vue";
 import Select from "./components/select.vue";
 import TreeSelect from "./components/tree-select/tree-select.vue";
 import Datetime from "./components/datetime.vue";

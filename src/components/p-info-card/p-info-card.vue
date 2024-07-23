@@ -42,7 +42,7 @@
 import Utils from "@/utils";
 import type { PropType } from "vue";
 import type { GETKEY, ICardListProps } from "./interface";
-import Tag from "../detail-page/components/tag.vue";
+import Tag from "../p-detail-page/components/tag.vue";
 
 const props = defineProps({
   columns: {
