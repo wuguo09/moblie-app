@@ -1,6 +1,6 @@
 {
   "name": "mobile-app-test",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "module": "dist/mobile-app.es.js",
   "typings": "dist/index.d.ts",
   "description": "移动端插件化基础插件测试",
