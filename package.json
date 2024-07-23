@@ -1,9 +1,9 @@
 {
   "name": "mobile-app-test",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "module": "dist/mobile-app.es.js",
   "typings": "dist/index.d.ts",
-  "description": "mobile-app",
+  "description": "移动端插件化基础插件测试",
   "style": "dist/style.css",
   "type": "module",
   "files": [
