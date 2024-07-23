@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 //将基础的一些页面打入到项目工程中
 
 import path, { resolve } from "path";
@@ -45,6 +46,27 @@ const checkPath = (filePath) => {
   });
 };
 
+async function copyFile(srcPath, destPath, subpackName) {
+  console.log('copy',srcPath, destPath, subpackName)
+  //构建目标目录
+  fs.mkdirSync(path.dirname(destPath), { recursive: true });
+  //复制文件
+  if (!subpackName) {
+    fs.copyFileSync(srcPath, destPath);
+  } else {
+    //用gulp来写入文件
+    await new Promise((resolve) => {
+      gulp
+        .src([srcPath])
+        //将文件中的 @ 标识符替换
+        .pipe(replace("@/", `@/${subpackName}/`))
+        //将文件写入目标地址
+        .pipe(gulp.dest(path.dirname(destPath)))
+        .on("end", () => resolve(true));
+    });
+  }
+}
+
 /**
  * 拷贝文件目录
  * @param {string} src 原目录路径
@@ -52,29 +74,10 @@ const checkPath = (filePath) => {
  * @param {string} subpackName 分包名，有的话会替换文件中的'@'标识符
  */
 async function copyDir(src, dest, subpackName) {
-  async function copyFile(srcPath, destPath) {
-    //复制文件
-    if (!subpackName) {
-      fs.copyFileSync(srcPath, destPath);
-    } else {
-      //用gulp来写入文件
-      await new Promise((resolve) => {
-        gulp
-          .src([srcPath])
-          //将文件中的 @ 标识符替换
-          .pipe(replace("@/", `@/${subpackName}/`))
-          //将文件写入目标地址
-          .pipe(gulp.dest(destPath))
-          .on("end", () => resolve(true));
-      });
-    }
-  }
   //判断是不是文件，是文件直接复制
   const type = await checkPath(src);
   if (type === "file") {
-    //构建目标目录
-    fs.mkdirSync(path.dirname(dest), { recursive: true });
-    await copyFile(src, dest);
+    await copyFile(src, dest, subpackName);
     return;
   }
   //构建目标目录
@@ -85,9 +88,9 @@ async function copyDir(src, dest, subpackName) {
     let destPath = path.join(dest, entry.name);
 
     if (entry.isDirectory()) {
-      copyDir(srcPath, destPath);
+      copyDir(srcPath, destPath, subpackName);
     } else {
-      await copyFile(srcPath, destPath);
+      await copyFile(srcPath, destPath, subpackName);
     }
   }
 }
@@ -151,8 +154,9 @@ async function installPages(plugin) {
         pages: [],
       });
       pages = pageJson.subPackages[pageJson.subPackages.length - 1]["pages"];
+    } else {
+      pages = subPackage["pages"];
     }
-    pages = subPackage["pages"];
   }
   //映射页面配置，减少循环
   const pageMap = new Map(pluginPageJson.pages.map((i) => [i.path, i]));
@@ -175,7 +179,8 @@ async function installPages(plugin) {
     pathArr.pop();
     const dirPath = pathArr.join("/"); //
     //安装页面文件
-    await installFiles([dirPath], plugin.srcPath, plugin.subpackName);
+    !plugin.isUninstall &&
+      (await installFiles([dirPath], plugin.srcPath, plugin.subpackName));
   }
 }
 
