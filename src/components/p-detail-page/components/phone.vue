@@ -1,6 +1,6 @@
 <template>
   <div class="phone-box">
-    <!-- <span class="name">{{
+    <span class="name">{{
       originalData ? originalData[nameKey] : "未知"
     }}</span>
     <span
@@ -9,12 +9,12 @@
       @click="tel"
     >
       <span class="param-icon-phone-fill"></span>
-    </span> -->
+    </span>
   </div>
 </template>
 
 <script setup lang="ts">
-// import { useRequestRefData } from "@/hooks/useRequest";
+import { useRequestRefData } from "@/hooks/useRequest";
 import { watch } from "vue";
 
 //window.location.href = 'tel:4000-000-000';
@@ -34,23 +34,23 @@ const props = defineProps({
     default: "phone",
   },
 });
-// const { originalData, getData } = useRequestRefData(async () => {
-//   if (props.api && props.code) {
-//     return props.api(props.code);
-//   }
-//   return null;
-// });
+const { originalData, getData } = useRequestRefData(async () => {
+  if (props.api && props.code) {
+    return props.api(props.code);
+  }
+  return null;
+});
 
-// watch(
-//   () => props.code,
-//   () => {
-//     getData();
-//   }
-// );
+watch(
+  () => props.code,
+  () => {
+    getData();
+  }
+);
 
-// function tel() {
-//   window.location.href = "tel:" + originalData.value[props.phoneKey];
-// }
+function tel() {
+  window.location.href = "tel:" + originalData.value[props.phoneKey];
+}
 </script>
 
 <style lang="scss" scoped>

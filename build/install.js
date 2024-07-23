@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 //将基础的一些页面打入到项目工程中
 
-import path, { resolve } from "path";
+import path from "path";
 import fs from "fs";
 import { pathToFileURL } from "url";
 // gulpjs是一个前端构建工具,而且gulpjs使用的是nodejs中stream来读取和操作数据，其速度更快。

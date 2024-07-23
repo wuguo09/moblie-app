@@ -1,6 +1,6 @@
 <template>
   <div class="user-list">
-    <!-- <div class="user-item" v-for="item in originalData" :key="item.id">
+    <div class="user-item" v-for="item in originalData" :key="item.id">
       <div class="imgs">
         <img :src="getImg(item)" />
       </div>
@@ -8,13 +8,13 @@
         <div class="name">{{ item.personName }}</div>
         <div class="text">{{ item.fkDeptCode }} {{ item.position }}</div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// import { useRequestRefData } from "@/hooks/useRequest";
-// import Utils from "@/utils";
+import { useRequestRefData } from "@/hooks/useRequest";
+import Utils from "@/utils";
 import { computed, watch } from "vue";
 const props = defineProps({
   codes: {
@@ -24,27 +24,27 @@ const props = defineProps({
     type: Function,
   },
 });
-// const { originalData, getData } = useRequestRefData(async () => {
-//   if (props.api && props.codes) {
-//     return props.api(props.codes.split(","));
-//   }
-//   return [];
-// });
+const { originalData, getData } = useRequestRefData(async () => {
+  if (props.api && props.codes) {
+    return props.api(props.codes.split(","));
+  }
+  return [];
+});
 
-// function getImg(data: any) {
-//   if (data.photoUrl)
-//     return data.photoUrl
-//       .split(",")
-//       .map((item: string) => Utils.getFileUrl(item))[0];
-//   return Utils.getImageUrl("home/avatar-default.png");
-// }
+function getImg(data: any) {
+  if (data.photoUrl)
+    return data.photoUrl
+      .split(",")
+      .map((item: string) => Utils.getFileUrl(item))[0];
+  return Utils.getImageUrl("home/avatar-default.png");
+}
 
-// watch(
-//   () => props.codes,
-//   () => {
-//     getData();
-//   }
-// );
+watch(
+  () => props.codes,
+  () => {
+    getData();
+  }
+);
 </script>
 
 <style lang="scss" scoped>

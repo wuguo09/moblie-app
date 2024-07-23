@@ -23,6 +23,11 @@ interface IPlugin {
    * 推荐，可以减少主包提体积
    *  */
   subpackName?: string;
+  /**
+   * todo 需要替换的路径别名(resolve.alias)，分包时有效，用于处理依赖的路径变更
+   * 所有路径别名
+   */
+  aliasReplace?:string[]
 }
 
 /**配置 */

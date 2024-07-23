@@ -51,6 +51,7 @@
 </template>
 
 <script setup lang="ts">
+import Utils from "@/utils";
 import { isArray } from "lodash";
 import { reactive } from "vue";
 
@@ -86,20 +87,22 @@ const getType = (str: string) => (str ? str.split(".").pop() : "");
 
 function getImgArr(val: string | Array<string>): Item[] {
   if (!val) return [];
-  const arr: string[] = isArray(val)
-    ? (val as string[])
-    : (val as string).split(",");
+  const arr: string[] = isArray(val) ? (val as string[]) : (val as string).split(",");
   return arr.map((str, index) => {
     if (typeof str === "object") {
-      const _str: Record<string, any> = str;
+      const _str:Record<string,any> = str
       return {
         name: _str?.name || "",
-        url: _str?.url ? (/^http/.test(_str?.url) ? _str?.url : _str?.url) : "",
+        url: _str?.url
+          ? /^http/.test(_str?.url)
+            ? _str?.url
+            : Utils.getFileUrl(_str?.url)
+          : "",
       };
     } else {
       return {
         name: getName(str),
-        url: str,
+        url: Utils.getFileUrl(str),
       };
     }
   });

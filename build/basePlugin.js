@@ -6,11 +6,11 @@ export function basePlugin(options) {
     name: "基础插件",
     srcPath: fileURLToPath(new URL("../src", import.meta.url).href),
     pages: ["pages/login/login"],
-    files: ["control", "static", "api/user.api.ts", "stores/user.ts"],
+    files: ["api", "stores", "config", "hooks", "router", "utils"],
   };
   const _options = {
     ...baseOptions,
-    ...options,
+    ...(options || {}),
   };
   return _options;
 }
