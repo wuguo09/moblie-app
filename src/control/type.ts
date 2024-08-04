@@ -1,6 +1,6 @@
 import type { Component, createSSRApp } from "vue";
 
-export type TApp = ReturnType<typeof createSSRApp>
+export type TApp = ReturnType<typeof createSSRApp>;
 
 /**钩子函数，可以定义生命周期 */
 export interface IMobileAppHooks {
@@ -23,6 +23,21 @@ interface IMobileAppEnv {
   [x: string]: string;
 }
 
+/**系统配置 */
+interface IAppConfig {
+  /**系统名称 */
+  appName: string;
+}
+
+/**登录配置 */
+interface ILoginConfig {
+  themeImg: string | "none";
+  bgImg: string | "none";
+  afterLoginPage:{
+    
+  }
+}
+
 /**app配置项 */
 export interface IMobileAppOption {
   /**环境变量 */
@@ -33,4 +48,7 @@ export interface IMobileAppOption {
   hooks?: Partial<IMobileAppHooks>;
   /**app组件,vue组件 */
   appCom: Component;
+  /**系统配置 */
+  appConfig: Partial<IAppConfig>;
+  //Todo 其他配置待补充，比如系统名称等系统信息
 }

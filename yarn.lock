@@ -4202,10 +4202,10 @@ mlly@^1.4.2, mlly@^1.7.0:
     pkg-types "^1.1.0"
     ufo "^1.5.3"
 
-mobile-app-test@^0.0.5:
-  version "0.0.5"
-  resolved "http://registry.paramcloud.cn/mobile-app-test/-/mobile-app-test-0.0.5.tgz#a301445ecf459c31a4e8d5e4d54266b4cc56be37"
-  integrity sha512-iOFjqM6jtl5+XONFpfjU7mI3PEoIb99L+PmPu28a8JgTjm9HStOOF3MWGBO8LYCwmUAWWGeNHnchDZ9U6hZUQg==
+mobile-app-test@^0.0.19:
+  version "0.0.19"
+  resolved "http://registry.paramcloud.cn/mobile-app-test/-/mobile-app-test-0.0.19.tgz#9532bfbfeff935710597d97f18653facfd7696bb"
+  integrity sha512-mt9P0k4dfC6BpukHEPpkGfwkJ2jkYqcqoTsY972Tf8meDoVkxlY0H16AUMFgmrVWhmkHJSu2NNqL9HnT8edp8w==
   dependencies:
     "@dcloudio/uni-app" "3.0.0-4000720240327002"
     "@dcloudio/uni-app-plus" "3.0.0-4000720240327002"
@@ -4221,6 +4221,11 @@ mobile-app-test@^0.0.5:
     "@dcloudio/uni-mp-weixin" "3.0.0-4000720240327002"
     "@dcloudio/uni-mp-xhs" "3.0.0-4000720240327002"
     "@dcloudio/uni-quickapp-webview" "3.0.0-4000720240327002"
+    "@types/node" "^20.14.11"
+    gulp "^5.0.0"
+    gulp-replace "^1.1.4"
+    js-md5 "^0.8.3"
+    ts-node "^10.9.2"
     uni-mini-router "^0.1.6"
     vue "^3.3.11"
     vue-i18n "^9.1.9"

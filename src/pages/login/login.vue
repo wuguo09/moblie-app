@@ -1,8 +1,8 @@
 <template>
-  <article class="login">
+  <article class="login default-login-page">
     <div class="login-wrapper">
       <div class="title">
-        {{ '巡查养护系统' }}
+        {{ "巡查养护系统" }}
       </div>
       <div class="img">
         <!-- <image :src="logImg" alt="" /> -->

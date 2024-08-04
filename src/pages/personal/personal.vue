@@ -1,6 +1,6 @@
 <template>
-    <view>
-首页
+    <view class="personal">
+
     </view>
 </template>
 

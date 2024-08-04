@@ -5,7 +5,7 @@ import * as path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "./",
-  plugins: [uni()],
+  plugins: [uni.default()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

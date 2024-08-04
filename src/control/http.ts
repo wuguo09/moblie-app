@@ -13,7 +13,7 @@ export const http = {
   post: (
     path: string,
     params?: Object,
-    contentType = "form",
+    contentType = "json",
     otherUrl?: string
   ): Promise<any> => {
     return new Promise((resolve, reject) => {

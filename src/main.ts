@@ -2,15 +2,16 @@ import App from "./App.vue";
 import { routes } from "./router";
 import { createMobileApp } from "./control";
 import uviewPlus from "uview-plus";
-// import { createSSRApp } from "vue";
+// createSSRApp;
 export function createApp() {
   const { app } = createMobileApp({
     appCom: App,
     routes: routes,
     env: {
-      httpBaseUrl: "",
-      fileBaseUrl: "",
-      fileUploadUri: "",
+      httpBaseUrl: "https://beijingroad.pre.paramst.cn/api",
+      fileBaseUrl: "https://beijingroad.pre.paramst.cn",
+      fileUploadUri:
+        "/api/resourceApp/resource/uploadFile?uploadPath=beijing-road",
     },
     hooks: {
       onBeforeCreate() {},
